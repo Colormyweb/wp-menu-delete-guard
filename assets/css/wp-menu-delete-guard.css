@@ -1,0 +1,222 @@
+/**
+ * WP Menu Delete Guard — styles admin
+ * Préfixe : wpmdg- (WP Menu Delete Guard)
+ */
+
+/* ============================================
+ * 1. Masquer le lien natif "Supprimer le menu"
+ * ============================================
+ * IMPORTANT : cibler UNIQUEMENT le lien du menu global,
+ * jamais les liens "Retirer" des items individuels (même classe .submitdelete).
+ */
+#delete-action .submitdelete,
+.submitdelete.deletion.menu-delete {
+	display: none !important;
+	visibility: hidden !important;
+}
+
+/* ============================================
+ * 2. Zone d'actions + bouton custom à droite
+ * ============================================ */
+
+.major-publishing-actions {
+	display: flex !important;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 12px;
+	position: relative;
+}
+
+.wpmdg-delete-button {
+	margin-left: auto !important;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	color: #b32d2e;
+	background: #fff;
+	border: 1px solid #b32d2e;
+	border-radius: 3px;
+	padding: 10px 16px;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 1.4;
+	text-decoration: none;
+	transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.wpmdg-delete-button:hover,
+.wpmdg-delete-button:focus {
+	color: #fff;
+	background: #b32d2e;
+	border-color: #b32d2e;
+}
+
+.wpmdg-delete-button:focus-visible {
+	outline: 3px solid #b32d2e;
+	outline-offset: 2px;
+}
+
+.wpmdg-delete-button .dashicons {
+	width: 16px;
+	height: 16px;
+	font-size: 16px;
+}
+
+/* ============================================
+ * 3. Modale d'alerte
+ * ============================================ */
+
+.wpmdg-modal-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(20, 0, 0, 0.85);
+	z-index: 100000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	animation: wpmdg-fade-in 0.2s ease;
+	backdrop-filter: blur(2px);
+}
+
+@keyframes wpmdg-fade-in {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+
+@keyframes wpmdg-modal-pop {
+	from { opacity: 0; transform: scale(0.92) translateY(10px); }
+	to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.wpmdg-modal {
+	background: #fff;
+	border-radius: 6px;
+	max-width: 520px;
+	width: 100%;
+	padding: 0;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 4px rgba(214, 54, 56, 0.2);
+	overflow: hidden;
+	animation: wpmdg-modal-pop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+	border-top: 6px solid #d63638;
+}
+
+.wpmdg-modal-header {
+	padding: 24px 28px 16px;
+	background: linear-gradient(to bottom, #fef0f0 0%, #fff 100%);
+}
+
+.wpmdg-modal-header h2 {
+	margin: 0;
+	font-size: 20px;
+	font-weight: 600;
+	color: #8a2424;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.wpmdg-modal-header h2 .dashicons {
+	color: #d63638;
+	width: 28px;
+	height: 28px;
+	font-size: 28px;
+	flex-shrink: 0;
+}
+
+.wpmdg-modal-body {
+	padding: 4px 28px 20px;
+}
+
+.wpmdg-modal-body p {
+	margin: 0 0 16px 0;
+	color: #1d2327;
+	line-height: 1.55;
+	font-size: 14px;
+}
+
+.wpmdg-modal-body label {
+	display: block;
+	margin-bottom: 6px;
+	font-size: 13px;
+	font-weight: 500;
+	color: #1d2327;
+}
+
+.wpmdg-modal-body input[type="text"] {
+	width: 100%;
+	padding: 10px 12px;
+	font-size: 14px;
+	border: 2px solid #8c8f94;
+	border-radius: 4px;
+	box-sizing: border-box;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.wpmdg-modal-body input[type="text"]:focus {
+	border-color: #d63638;
+	box-shadow: 0 0 0 3px rgba(214, 54, 56, 0.15);
+	outline: none;
+}
+
+.wpmdg-modal-body input[type="text"].wpmdg-match {
+	border-color: #00a32a;
+	box-shadow: 0 0 0 3px rgba(0, 163, 42, 0.15);
+}
+
+.wpmdg-modal-footer {
+	padding: 16px 28px 20px;
+	display: flex;
+	gap: 10px;
+	justify-content: flex-end;
+	background: #f6f7f7;
+	border-top: 1px solid #e0e0e1;
+}
+
+.wpmdg-modal-footer .button {
+	padding: 8px 16px;
+	height: auto;
+	font-size: 14px;
+}
+
+.wpmdg-modal-footer .wpmdg-button-danger {
+	background: #d63638;
+	border-color: #b32d2e;
+	color: #fff;
+	text-shadow: none;
+	box-shadow: 0 1px 0 #b32d2e;
+	font-weight: 600;
+}
+
+.wpmdg-modal-footer .wpmdg-button-danger:hover:not(:disabled) {
+	background: #b32d2e;
+	border-color: #8a2424;
+	color: #fff;
+}
+
+.wpmdg-modal-footer .wpmdg-button-danger:focus-visible {
+	outline: 3px solid #d63638;
+	outline-offset: 2px;
+}
+
+.wpmdg-modal-footer .wpmdg-button-danger:disabled {
+	background: #dcdcde;
+	border-color: #c3c4c7;
+	color: #a7aaad;
+	cursor: not-allowed;
+	box-shadow: none;
+}
+
+.wpmdg-modal-footer .wpmdg-modal-cancel:focus-visible {
+	outline: 3px solid #2271b1;
+	outline-offset: 2px;
+}
+
+/* Respect du prefers-reduced-motion */
+@media ( prefers-reduced-motion: reduce ) {
+	.wpmdg-modal-overlay,
+	.wpmdg-modal {
+		animation: none !important;
+	}
+}
